@@ -14,12 +14,21 @@ namespace BizTalkComponents.OrchestrationUtils
     [Serializable]
     public sealed class CustomBTXMessage : BTXMessage, IDisposable, IEnumerable<XLANGPart>
     {
-        public CustomBTXMessage(string messageName, Context context)
-            : base(messageName, context)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msgName">The name of the Message</param>
+        /// <param name="owningContext">use Service.RootService.XlangStore.OwningContext</param>
+        public CustomBTXMessage(string msgName, Context owningContext)
+            : base(msgName, owningContext)
         {
-            context.RefMessage(this);
+            owningContext.RefMessage(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>An XLANGPart generic enumerator</returns>
         IEnumerator<XLANGPart> IEnumerable<XLANGPart>.GetEnumerator()
         {
             return this.Cast<XLANGPart>().GetEnumerator();

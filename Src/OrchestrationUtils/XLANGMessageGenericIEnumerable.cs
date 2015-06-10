@@ -9,15 +9,15 @@ namespace BizTalkComponents.OrchestrationUtils
     [Serializable]
     public class XLANGMessageGenericIEnumerable : XLANGMessage, IEnumerable<XLANGPart>, IDisposable
     {
-        private readonly XLANGMessage _xlangMessage;
+        private readonly XLANGMessage _message;
 
         // Flag: Has Dispose already been called?
         private bool _disposed;
 
-        public XLANGMessageGenericIEnumerable(XLANGMessage xlangMessage)
+        public XLANGMessageGenericIEnumerable(XLANGMessage message)
         {
-            if (xlangMessage == null) throw new ArgumentNullException("xlangMessage");
-            _xlangMessage = xlangMessage;
+            if (message == null) throw new ArgumentNullException("message");
+            _message = message;
         }
 
         public override string Name
@@ -25,7 +25,7 @@ namespace BizTalkComponents.OrchestrationUtils
             get
             {
                 if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-                return _xlangMessage.Name;
+                return _message.Name;
             }
         }
 
@@ -34,7 +34,7 @@ namespace BizTalkComponents.OrchestrationUtils
             get
             {
                 if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-                return _xlangMessage.Count;
+                return _message.Count;
             }
         }
 
@@ -43,7 +43,7 @@ namespace BizTalkComponents.OrchestrationUtils
             get
             {
                 if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-                return _xlangMessage[partName];
+                return _message[partName];
             }
         }
 
@@ -52,7 +52,7 @@ namespace BizTalkComponents.OrchestrationUtils
             get
             {
                 if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-                return _xlangMessage[partIndex];
+                return _message[partIndex];
             }
         }
 
@@ -66,44 +66,44 @@ namespace BizTalkComponents.OrchestrationUtils
         IEnumerator<XLANGPart> IEnumerable<XLANGPart>.GetEnumerator()
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            return _xlangMessage.Cast<XLANGPart>().GetEnumerator();
+            return _message.Cast<XLANGPart>().GetEnumerator();
         }
 
         public override IEnumerator GetEnumerator()
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            return _xlangMessage.GetEnumerator();
+            return _message.GetEnumerator();
         }
 
         public override void AddPart(XLANGPart part)
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            _xlangMessage.AddPart(part);
+            _message.AddPart(part);
         }
 
         public override void AddPart(XLANGPart part, string partName)
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            _xlangMessage.AddPart(part, partName);
+            _message.AddPart(part, partName);
         }
 
         public override void AddPart(object part, string partName)
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            _xlangMessage.AddPart(part, partName);
+            _message.AddPart(part, partName);
         }
 
         public override object GetPropertyValue(Type propType)
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            return _xlangMessage.GetPropertyValue(propType);
+            return _message.GetPropertyValue(propType);
         }
 
         public override void SetPropertyValue(Type propType, object value)
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
 
-            _xlangMessage.SetPropertyValue(propType, value);
+            _message.SetPropertyValue(propType, value);
         }
 
         // Protected implementation of Dispose pattern.
@@ -114,7 +114,7 @@ namespace BizTalkComponents.OrchestrationUtils
 
             if (disposing)
             {
-                _xlangMessage.Dispose();
+                _message.Dispose();
             }
             _disposed = true;
         }

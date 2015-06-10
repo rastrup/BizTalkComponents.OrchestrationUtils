@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.BizTalk.SSOClient.Interop;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.BizTalk.SSOClient.Interop;
 
 namespace BizTalkComponents.OrchestrationUtils
 {
@@ -19,7 +19,7 @@ namespace BizTalkComponents.OrchestrationUtils
 
         /// <summary>
         /// Read method helps get configuration data
-        /// </summary>        
+        /// </summary>
         /// <param name="appName">The name of the affiliate application to represent the configuration container to access</param>
         /// <param name="propName">The property name to read</param>
         /// <returns>
@@ -31,6 +31,7 @@ namespace BizTalkComponents.OrchestrationUtils
             {
                 SSOConfigStore ssoConfigStore = new SSOConfigStore();
                 ConfigurationPropertyBag configurationPropertyBag = new ConfigurationPropertyBag();
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 ((ISSOConfigStore)ssoConfigStore).GetConfigInfo(appName, identifierGUID, SSOFlag.SSO_FLAG_RUNTIME, configurationPropertyBag);
                 object ptrVar;
                 configurationPropertyBag.Read(propName, out ptrVar, 0);
@@ -44,7 +45,7 @@ namespace BizTalkComponents.OrchestrationUtils
         }
     }
 
-// The code above uses this propertybag
+    // The code above uses this propertybag
     public class ConfigurationPropertyBag : IPropertyBag
     {
         /// <summary>
@@ -61,6 +62,7 @@ namespace BizTalkComponents.OrchestrationUtils
         }
 
         #region IPropertyBag Members
+
         /// <summary>
         /// Implements IPropertyBag read
         /// </summary>
@@ -81,7 +83,8 @@ namespace BizTalkComponents.OrchestrationUtils
         {
             _properties.Add(propName, ptrVar);
         }
-        #endregion
+
+        #endregion IPropertyBag Members
 
         /// <summary>
         /// Searches for property key

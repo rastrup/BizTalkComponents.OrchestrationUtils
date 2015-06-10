@@ -8,8 +8,8 @@ namespace BizTalkComponents.OrchestrationUtils
     [Serializable]
     public class XLANGMessageCollectionWrapper : XLANGMessageGenericIEnumerable, ICollection<XLANGPart>
     {
-        public XLANGMessageCollectionWrapper(XLANGMessage xlangMessage)
-            : base(xlangMessage)
+        public XLANGMessageCollectionWrapper(XLANGMessage message)
+            : base(message)
         {
         }
 

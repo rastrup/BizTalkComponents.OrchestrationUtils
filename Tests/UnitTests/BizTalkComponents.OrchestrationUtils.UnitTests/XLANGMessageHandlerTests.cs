@@ -1,12 +1,12 @@
-﻿using System;
+﻿using BizTalkComponents.OrchestrationUtils.UnitTests.Properties;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Text;
-using BizTalkComponents.OrchestrationUtils.UnitTests.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BizTalkComponents.OrchestrationUtils.UnitTests
 {
-    [TestClass()]
+    [TestClass]
     public class XLANGMessageHandlerTests
     {
         private readonly XLANGMessageHandler _messageHandler = new XLANGMessageHandler(new MockXLANGMessage());
@@ -14,10 +14,9 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
         [TestInitialize]
         public void Initialize()
         {
-            
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void LoadFromStringTest()
         {
             _messageHandler.LoadFromString(Resources.XmlExample);
@@ -26,7 +25,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             var feedback = _messageHandler.RetrieveAsString();
             Assert.AreEqual(Resources.XmlExample, feedback);
         }
-    
+
         [TestMethod]
         public void LoadFromStreamTest()
         {
@@ -53,7 +52,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             Assert.AreEqual(GetBase64Example(), base64String);
         }
 
-        public static string GetBase64Example()
+        private static string GetBase64Example()
         {
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(Resources.XmlExample));
         }

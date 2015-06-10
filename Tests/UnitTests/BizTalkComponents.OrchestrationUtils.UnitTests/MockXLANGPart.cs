@@ -1,6 +1,5 @@
 ﻿using Microsoft.XLANGs.BaseTypes;
 using Microsoft.XLANGs.Core;
-using Microsoft.XLANGs.RuntimeTypes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +23,10 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             get { throw new NotImplementedException(); }
         }
 
+#pragma warning disable 618
+
         public override XmlSchemaCollection XmlSchemaCollection
+#pragma warning restore 618
         {
             get { throw new NotImplementedException(); }
         }
@@ -59,12 +61,12 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
                             ? (!(source is IStreamFactory)
                                 ? (!(source is IXmlReaderFactory)
                                     ? new Value(source)
-                                    : new Value((IXmlReaderFactory) source))
-                                : new Value((IStreamFactory) source))
-                            : new Value((XmlReader) source))
-                        : new Value((Stream) source))
-                    : new Value((XmlNode) source))
-                : new Value((XmlDocument) source);
+                                    : new Value((IXmlReaderFactory)source))
+                                : new Value((IStreamFactory)source))
+                            : new Value((XmlReader)source))
+                        : new Value((Stream)source))
+                    : new Value((XmlNode)source))
+                : new Value((XmlDocument)source);
         }
 
         public override void PrefetchXPathValue(string xpath)
