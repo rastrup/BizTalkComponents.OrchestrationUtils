@@ -7,6 +7,8 @@ namespace BizTalkComponents.OrchestrationUtils
 {
     /// <summary>
     /// Contains helper methods for using SSO as a config store.
+    /// Slightly modified from
+    /// http://www.getcodesamples.com/src/2B2085E1/C4A921B1
     /// </summary>
     public static class SSOConfigHelper
     {

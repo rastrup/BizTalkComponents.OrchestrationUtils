@@ -10,6 +10,8 @@ namespace BizTalkComponents.OrchestrationUtils
 {
     /// <summary>
     /// A stream factory with a file as its source of data
+    /// Credit:
+    /// http://blogs.msdn.com/b/scottwoo/archive/2004/04/19/116298.aspx
     /// </summary>
     public class FileStreamFactory : IStreamFactory
     {

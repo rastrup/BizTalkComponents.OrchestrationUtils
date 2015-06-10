@@ -7,6 +7,10 @@ using Microsoft.XLANGs.BaseTypes;
 
 namespace BizTalkComponents.OrchestrationUtils
 {
+    /// <summary>
+    /// Credit:
+    /// https://msdn.microsoft.com/en-us/library/ee253435%28v=bts.10%29.aspx
+    /// </summary>
     public abstract class BaseFormatter : IFormatter
     {
         public virtual SerializationBinder Binder

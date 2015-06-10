@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.BizTalk.Streaming;
+using Microsoft.XLANGs.BaseTypes;
+using System;
 using System.IO;
 using System.Xml;
-using Microsoft.BizTalk.Streaming;
-using Microsoft.XLANGs.BaseTypes;
 
 namespace BizTalkComponents.OrchestrationUtils
 {
@@ -57,7 +57,7 @@ namespace BizTalkComponents.OrchestrationUtils
             using (var stream = RetrieveAs<Stream>())
             {
                 var byteArray = new byte[stream.Length];
-                stream.Read(byteArray, 0, (int) stream.Length);
+                stream.Read(byteArray, 0, (int)stream.Length);
                 return Convert.ToBase64String(byteArray);
             }
         }
@@ -121,7 +121,7 @@ namespace BizTalkComponents.OrchestrationUtils
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
 
-            return (T) _message[0].RetrieveAs(typeof (T));
+            return (T)_message[0].RetrieveAs(typeof(T));
         }
 
         public string GetRootNodeName()

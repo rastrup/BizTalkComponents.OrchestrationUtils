@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Microsoft.XLANGs.BaseTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.XLANGs.BaseTypes;
 
 namespace BizTalkComponents.OrchestrationUtils
 {
+    [Serializable]
     public class XLANGMessageCollectionWrapper : XLANGMessageGenericIEnumerable, ICollection<XLANGPart>
     {
-        public XLANGMessageCollectionWrapper(XLANGMessage xlangMessage) : base(xlangMessage)
+        public XLANGMessageCollectionWrapper(XLANGMessage xlangMessage)
+            : base(xlangMessage)
         {
-            
         }
 
         public void Add(XLANGPart item)
@@ -39,6 +40,6 @@ namespace BizTalkComponents.OrchestrationUtils
             throw new NotSupportedException();
         }
 
-        public bool IsReadOnly { get { return false; }}
+        public bool IsReadOnly { get { return false; } }
     }
 }

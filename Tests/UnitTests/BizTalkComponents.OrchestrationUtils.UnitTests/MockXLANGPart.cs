@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.XLANGs.BaseTypes;
+using Microsoft.XLANGs.Core;
+using Microsoft.XLANGs.RuntimeTypes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using Microsoft.XLANGs.BaseTypes;
-using Microsoft.XLANGs.Core;
 
 namespace BizTalkComponents.OrchestrationUtils.UnitTests
 {
@@ -45,7 +46,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
 
         public override string GetXPathValue(string xpath)
         {
-            throw new NotImplementedException();
+            return _value.GetXPath(xpath, true).ToString();
         }
 
         public override void LoadFrom(object source)
@@ -68,7 +69,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
 
         public override void PrefetchXPathValue(string xpath)
         {
-            throw new NotImplementedException();
+            _value.PrefetchXPath(xpath);
         }
 
         public override object RetrieveAs(Type t)
