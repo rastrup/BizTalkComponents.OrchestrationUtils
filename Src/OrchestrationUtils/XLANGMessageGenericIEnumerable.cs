@@ -7,7 +7,7 @@ using System.Linq;
 namespace BizTalkComponents.OrchestrationUtils
 {
     [Serializable]
-    public class XLANGMessageGenericIEnumerable : XLANGMessage, IEnumerable<XLANGPart>, IDisposable
+    public class XLANGMessageGenericIEnumerable : XLANGMessage, IDisposable, IReadOnlyList<XLANGPart>
     {
         private readonly XLANGMessage _message;
 
