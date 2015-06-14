@@ -1,6 +1,7 @@
 ﻿using BizTalkComponents.OrchestrationUtils.UnitTests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 
@@ -14,6 +15,12 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
         [TestInitialize]
         public void Initialize()
         {
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _messageHandler.Dispose();
         }
 
         [TestMethod]
@@ -50,6 +57,23 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             Assert.AreEqual(Resources.XmlExample, feedback);
             var base64String = _messageHandler.RetrieveAsBase64();
             Assert.AreEqual(GetBase64Example(), base64String);
+        }
+
+        [TestMethod]
+        public void LoadFromBase64BinaryTest()
+        {
+            byte[] byteArray;
+            using (var image = Resources.BizTalkServer2013R2)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    image.Save(stream, ImageFormat.Png);
+                    stream.Flush();
+                    byteArray = stream.ToArray();
+                }
+            }
+            _messageHandler.LoadFromBase64(Convert.ToBase64String(byteArray));
+            var feedback = _messageHandler.RetrieveAsBase64();
         }
 
         private static string GetBase64Example()

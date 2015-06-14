@@ -43,7 +43,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
 
         public override Type GetPartType()
         {
-            throw new NotImplementedException();
+            return GetType();
         }
 
         public override string GetXPathValue(string xpath)
@@ -61,12 +61,12 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
                             ? (!(source is IStreamFactory)
                                 ? (!(source is IXmlReaderFactory)
                                     ? new Value(source)
-                                    : new Value((IXmlReaderFactory)source))
-                                : new Value((IStreamFactory)source))
-                            : new Value((XmlReader)source))
-                        : new Value((Stream)source))
-                    : new Value((XmlNode)source))
-                : new Value((XmlDocument)source);
+                                    : new Value((IXmlReaderFactory) source))
+                                : new Value((IStreamFactory) source))
+                            : new Value((XmlReader) source))
+                        : new Value((Stream) source))
+                    : new Value((XmlNode) source))
+                : new Value((XmlDocument) source);
         }
 
         public override void PrefetchXPathValue(string xpath)

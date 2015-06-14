@@ -61,6 +61,16 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BizTalkServer2013R2 {
+            get {
+                object obj = ResourceManager.GetObject("BizTalkServer2013R2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
         /// &lt;library
         ///   xmlns=&quot;http://eric.van-der-vlist.com/ns/library&quot;

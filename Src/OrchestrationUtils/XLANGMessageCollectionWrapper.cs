@@ -20,7 +20,7 @@ namespace BizTalkComponents.OrchestrationUtils
 
         public void Clear()
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("XLANGMessage supports addition of parts only, not removal.");
         }
 
         public bool Contains(XLANGPart item)
@@ -37,9 +37,12 @@ namespace BizTalkComponents.OrchestrationUtils
 
         public bool Remove(XLANGPart item)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("XLANGMessage supports addition of parts only, not removal.");
         }
 
-        public bool IsReadOnly { get { return false; } }
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
     }
 }

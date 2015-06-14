@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BizTalkComponents.OrchestrationUtils.UnitTests
 {
-    internal class MockXLANGMessage : XLANGMessage, IDisposable, IEnumerable<XLANGPart>
+    internal class MockXLANGMessage : XLANGMessage, IDisposable, IReadOnlyList<XLANGPart>
     {
         private readonly IDictionary<Type, object> _properties = new Dictionary<Type, object>();
         private IList<XLANGPart> _parts = new List<XLANGPart>();
@@ -16,19 +16,9 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             _parts.Add(new MockXLANGPart());
         }
 
-        public override int Count
-        {
-            get { return _parts.Count; }
-        }
-
         public override string Name
         {
             get { return "MockXLANGMessage"; }
-        }
-
-        public override XLANGPart this[int partIndex]
-        {
-            get { return _parts[partIndex]; }
         }
 
         public override XLANGPart this[string partName]
@@ -44,6 +34,16 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             }
             _parts = null;
             _partsByName = null;
+        }
+
+        public override int Count
+        {
+            get { return _parts.Count; }
+        }
+
+        public override XLANGPart this[int partIndex]
+        {
+            get { return _parts[partIndex]; }
         }
 
         IEnumerator<XLANGPart> IEnumerable<XLANGPart>.GetEnumerator()
