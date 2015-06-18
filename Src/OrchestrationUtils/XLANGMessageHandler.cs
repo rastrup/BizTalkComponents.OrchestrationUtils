@@ -43,11 +43,9 @@ namespace BizTalkComponents.OrchestrationUtils
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
             if (base64Content == null) throw new ArgumentNullException("base64Content");
 
-            var byteArray = Convert.FromBase64String(base64Content);
-            var stream = new VirtualStream();
-            stream.Write(byteArray, 0, byteArray.Length);
-            stream.Flush();
-            LoadFromStream(stream);
+            var writer = new BinaryWriter(new VirtualStream());
+            writer.Write(Convert.FromBase64String(base64Content));
+            LoadFromStream(writer.BaseStream);
         }
 
         public string RetrieveAsBase64()
@@ -56,9 +54,10 @@ namespace BizTalkComponents.OrchestrationUtils
 
             using (var stream = RetrieveAs<Stream>())
             {
-                var byteArray = new byte[stream.Length];
-                stream.Read(byteArray, 0, (int)stream.Length);
-                return Convert.ToBase64String(byteArray);
+                using (var reader = new BinaryReader(stream))
+                {
+                    return Convert.ToBase64String(reader.ReadBytes((int)stream.Length));
+                }
             }
         }
 

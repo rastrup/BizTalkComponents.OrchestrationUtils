@@ -15,7 +15,7 @@ namespace BizTalkComponents.OrchestrationUtils
         /// <summary>
         ///     Can be set to anything
         /// </summary>
-        private static string _idesntifierGuid = "ConfigProperties";
+        private static string _identifierGuid = "ConfigProperties";
 
         /// <summary>
         ///     Read method helps get configuration data
