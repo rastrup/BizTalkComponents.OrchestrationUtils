@@ -1,6 +1,7 @@
 ﻿using BizTalkComponents.OrchestrationUtils.UnitTests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Xml;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
@@ -31,6 +32,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             Assert.AreEqual("library", rootNodeName);
             var feedback = _messageHandler.RetrieveAsString();
             Assert.AreEqual(Resources.XmlExample, feedback);
+            var document = _messageHandler.RetrieveAs<XmlDocument>();
         }
 
         [TestMethod]
@@ -45,6 +47,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             Assert.AreEqual("library", rootNodeName);
             var feedback = _messageHandler.RetrieveAsString();
             Assert.AreEqual(Resources.XmlExample, feedback);
+            var document = _messageHandler.RetrieveAs<XmlDocument>();
         }
 
         [TestMethod]
@@ -57,6 +60,7 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             Assert.AreEqual(Resources.XmlExample, feedback);
             var base64String = _messageHandler.RetrieveAsBase64();
             Assert.AreEqual(GetBase64Example(), base64String);
+            var document = _messageHandler.RetrieveAs<XmlDocument>();
         }
 
         [TestMethod]
@@ -76,6 +80,25 @@ namespace BizTalkComponents.OrchestrationUtils.UnitTests
             var feedback = _messageHandler.RetrieveAsBase64();
         }
 
+
+        [TestMethod]
+        [ExpectedException(typeof(XmlException))]
+        public void LoadFromBase64BinaryTestFail()
+        {
+            byte[] byteArray;
+            using (var image = Resources.BizTalkServer2013R2)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    image.Save(stream, ImageFormat.Png);
+                    stream.Flush();
+                    byteArray = stream.ToArray();
+                }
+            }
+            _messageHandler.LoadFromBase64(Convert.ToBase64String(byteArray));
+            var feedback = _messageHandler.RetrieveAs<XmlDocument>();
+        }
+        
         private static string GetBase64Example()
         {
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(Resources.XmlExample));

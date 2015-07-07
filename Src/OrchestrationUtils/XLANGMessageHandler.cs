@@ -1,6 +1,7 @@
 ﻿using Microsoft.BizTalk.Streaming;
 using Microsoft.XLANGs.BaseTypes;
 using System;
+using System.Text;
 using System.IO;
 using System.Xml;
 
@@ -43,9 +44,12 @@ namespace BizTalkComponents.OrchestrationUtils
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
             if (base64Content == null) throw new ArgumentNullException("base64Content");
 
-            var writer = new BinaryWriter(new VirtualStream());
-            writer.Write(Convert.FromBase64String(base64Content));
-            LoadFromStream(writer.BaseStream);
+            using (var writer = new BinaryWriter(new VirtualStream(), Encoding.UTF8, true))
+            {
+                writer.Write(Convert.FromBase64String(base64Content));
+                writer.Flush();
+                LoadFromStream(writer.BaseStream);
+            }
         }
 
         public string RetrieveAsBase64()
@@ -66,28 +70,23 @@ namespace BizTalkComponents.OrchestrationUtils
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
             if (content == null) throw new ArgumentNullException("content");
 
-            var writer = new StreamWriter(new VirtualStream());
-            writer.Write(content);
-            writer.Flush();
-            LoadFromStream(writer.BaseStream);
+            using (var writer = new StreamWriter(new VirtualStream(), Encoding.UTF8, 1024, true))
+            {
+                writer.Write(content);
+                writer.Flush();
+                LoadFromStream(writer.BaseStream);
+            }
         }
 
         public string RetrieveAsString()
         {
             if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-            Stream stream = null;
-            try
+            using (var stream = RetrieveAs<Stream>())
             {
-                stream = RetrieveAs<Stream>();
                 using (var reader = new StreamReader(stream))
                 {
-                    stream = null;
                     return reader.ReadToEnd();
                 }
-            }
-            finally
-            {
-                if (stream != null) stream.Dispose();
             }
         }
 
